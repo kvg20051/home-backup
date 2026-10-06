@@ -60,6 +60,13 @@ sudo ssh-keygen -t ed25519 -N '' -f /root/.ssh/id_home_backup
 sudo ssh-copy-id -i /root/.ssh/id_home_backup.pub kvg@ficus
 sudo ssh -i /root/.ssh/id_home_backup kvg@ficus true   # обязательно: добавит ficus в known_hosts
 ```
+**Пример на машине gen30:** (от root):
+
+```bash
+sudo ssh-keygen -t ed25519 -N '' -C "home-backup@gen30" -f /root/.ssh/id_home_backup
+sudo ssh-copy-id -i /root/.ssh/id_home_backup.pub kvg@ficus
+sudo ssh -i /root/.ssh/id_home_backup kvg@ficus 'echo OK; ls -ld /zroot/BACKUP'
+```
 
 Последний шаг нужен, потому что сервис видит `/root` только для чтения (`ProtectHome=read-only`) и сам записать known_hosts не сможет.
 
